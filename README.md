@@ -9,7 +9,17 @@ Your project description here.
 Overview of the files and data present in the root directory. 
 
 ## Running Files
-How do you run your files? What should happen when you run your files?
+In order to run the main training pipeline for customer churn, please use the following command:
+
+```
+ipython main.py
+```
+To run all the tests required with pytest, run the following command:
+
+```
+pytest tests.py -p no:logging
+```
+
 
 
 

@@ -2,7 +2,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 
-from udacity_customer_churn.constants import RF_PARAM_GRID, LR_PARAM_GRID
+from constants import RF_PARAM_GRID, LR_PARAM_GRID
 
 from typing import List, Dict, Any
 

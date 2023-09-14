@@ -14,8 +14,8 @@ from seaborn import histplot, heatmap # pylint: disable=W0611
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import plot_roc_curve, classification_report
 
-from udacity_customer_churn.models import RandomForestModel, LogisticRegressionModel
-from udacity_customer_churn.constants import DATA_FOLDER_PATH, EDA_FOLDER_PATH, CATEGORICAL_COLUMNS, KEEP_COLUMNS, SEED
+from models import RandomForestModel, LogisticRegressionModel
+from constants import DATA_FOLDER_PATH, EDA_FOLDER_PATH, CATEGORICAL_COLUMNS, KEEP_COLUMNS, SEED
 
 class Pipeline:
     """Pipeline object containing the steps of the training machine learning pipeline"""
@@ -182,3 +182,8 @@ class Pipeline:
         best_model = self.get_best_estimator()
         self.save_model(best_model)
         self.save_estimator_evaluation_metrics(best_model)
+
+if __name__=="__main__":
+    Pipeline.perform_eda(EDA_FOLDER_PATH)
+    Pipeline(LogisticRegressionModel()).run_pipeline()
+    Pipeline(RandomForestModel()).run_pipeline()

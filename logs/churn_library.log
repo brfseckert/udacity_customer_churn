@@ -1,0 +1,10 @@
+2023-09-14 11:10:31,037 - INFO - Testing preare_raw_dataframe: SUCCESS
+2023-09-14 11:10:32,233 - INFO - Testing perform_eda: SUCCESS
+2023-09-14 11:10:32,310 - INFO - Testing perform_feature_engineering: SUCCESS
+2023-09-14 11:10:32,390 - INFO - Testing split_train_and_test_datasets: SUCCESS
+2023-09-14 11:10:32,431 - INFO - Testing train_model: SUCCESS
+2023-09-14 11:10:32,470 - INFO - Testing get_best_estimator: SUCCESS
+2023-09-14 11:10:32,514 - INFO - Testing predict: SUCCESS
+2023-09-14 11:10:32,555 - INFO - Testing save_estimator_evaluation_metrics: SUCCESS
+2023-09-14 11:10:32,596 - INFO - Testing save_model: SUCCESS
+2023-09-14 11:10:32,640 - INFO - Testing run_pipeline: SUCCESS
