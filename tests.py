@@ -3,7 +3,7 @@ from main import Pipeline
 import pytest
 from constants import DATA_FOLDER_PATH, EDA_FOLDER_PATH, CATEGORICAL_COLUMNS, KEEP_COLUMNS
 from matplotlib.pyplot import figure, savefig, close, title
-from unittest.mock import MagicMock, call, Mock, patch
+from unittest.mock import MagicMock, call, Mock, patch, PropertyMock
 from pandas import DataFrame
 from models import LogisticRegressionModel
 
@@ -16,7 +16,9 @@ logging.basicConfig(
 
 @pytest.fixture
 def pipeline_instance():
-    return Pipeline(MagicMock())
+	mock_model = MagicMock()
+	mock_model.model_name.return_value ='mock_name'
+	return Pipeline(mock_model)
 
 @pytest.fixture(scope='function')
 def perform_eda():
@@ -122,13 +124,18 @@ def test_save_estimator_evaluation_metric(pipeline_instance):
 		logging.error("Testing save_estimator_evaluation_metrics: ERROR metrics were not saved")
 		raise err
 	
-def test_save_model(pipeline_instance):
+@patch('main.joblib.dump')
+def test_save_model(mock_dump: MagicMock, pipeline_instance):
 	"""Test save_model method"""
 	try:
-		pipeline_instance.save_model = MagicMock()
-		pipeline_instance.save_model()
-		pipeline_instance.save_model.assert_called()
-		logging.info("Testing save_model: SUCCESS")
+		mock_model = MagicMock()
+		mock_name = pipeline_instance.model_name
+		pipeline_instance.save_model(mock_model)
+		logging.info(f'{mock_model}')
+		logging.info(f'{pipeline_instance.model_name}')
+		logging.info(f'{mock_dump.call_args_list}')
+		mock_dump.assert_called_with(mock_model, f"./models/{str(mock_name)}_model.pkl")
+		logging.info("Testing run_pipeline: SUCCESS")
 	except AssertionError as err:
 		logging.error("Testing save_model: ERROR model(s) were not successfully saved")
 		raise err
