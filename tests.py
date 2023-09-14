@@ -140,9 +140,9 @@ def test_run_pipeline(mock_model: MagicMock, mock_save_model: MagicMock, mock_sa
 	"""Test run_pipeline method"""
 	try:
 		pipeline_instance.run_pipeline()
-		pipeline_instance.get_best_estimator.assert_called_once()
-		pipeline_instance.save_model.assert_called_once()
-		pipeline_instance.save_model.save_estimator_evaluation_metrics()
+		mock_model.assert_called_once()
+		mock_save_model.assert_called_once()
+		mock_saved_metrics.assert_called_once()
 		logging.info("Testing run_pipeline: SUCCESS")
 	except AssertionError as err:
 		logging.error("Testing run_pipeline: pipeline was not sucessfully completed")
