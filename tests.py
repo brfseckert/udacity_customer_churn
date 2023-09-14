@@ -3,7 +3,7 @@ from main import Pipeline
 import pytest
 from constants import DATA_FOLDER_PATH, EDA_FOLDER_PATH, CATEGORICAL_COLUMNS, KEEP_COLUMNS
 from matplotlib.pyplot import figure, savefig, close, title
-from unittest.mock import MagicMock, call, Mock
+from unittest.mock import MagicMock, call, Mock, patch
 from pandas import DataFrame
 from models import LogisticRegressionModel
 
@@ -96,6 +96,7 @@ def test_get_best_estimator(pipeline_instance):
 		logging.error("Testing get_best_estimator: ERROR model(s) were not sucessfully trained")
 		raise err
 	
+
 def test_predict(pipeline_instance):
 	"""Test predict method"""
 	try:
@@ -132,12 +133,16 @@ def test_save_model(pipeline_instance):
 		logging.error("Testing save_model: ERROR model(s) were not successfully saved")
 		raise err
 
-def test_run_pipeline(pipeline_instance):
+@patch('main.Pipeline.get_best_estimator', return_value=MagicMock())
+@patch('main.Pipeline.save_model')
+@patch('main.Pipeline.save_estimator_evaluation_metrics')
+def test_run_pipeline(mock_model: MagicMock, mock_save_model: MagicMock, mock_saved_metrics: MagicMock, pipeline_instance):
 	"""Test run_pipeline method"""
 	try:
-		pipeline_instance.run_pipeline = MagicMock()
 		pipeline_instance.run_pipeline()
-		pipeline_instance.run_pipeline.assert_called()
+		pipeline_instance.get_best_estimator.assert_called_once()
+		pipeline_instance.save_model.assert_called_once()
+		pipeline_instance.save_model.save_estimator_evaluation_metrics()
 		logging.info("Testing run_pipeline: SUCCESS")
 	except AssertionError as err:
 		logging.error("Testing run_pipeline: pipeline was not sucessfully completed")
