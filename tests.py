@@ -1,3 +1,10 @@
+"""
+Tests and logs functions and classes used in the project
+
+Author: Felipe Eckert
+Date: 2023-09-15
+"""
+
 import logging
 from main import Pipeline
 import pytest

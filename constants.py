@@ -1,3 +1,10 @@
+"""
+Defines the constants used throughout the project
+
+Author: Felipe Eckert
+Date: 2023-09-15
+""""
+
 DATA_FOLDER_PATH = 'data/bank_data.csv'
 EDA_FOLDER_PATH='images/eda/'
 

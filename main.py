@@ -1,5 +1,8 @@
 """
 Runs the end-to-end machine learning pipeline to predict customer churn
+
+Author: Felipe Eckert
+Date: 2023-09-15
 """
 
 from typing import List, Type
@@ -53,6 +56,7 @@ class Pipeline:
             features: DataFrame,
             folder: str,
             name: str) -> None:
+        """Saves a classification report as a csv file"""
         report = classification_report(
             response, self.predict(
                 model, features), output_dict=True)
